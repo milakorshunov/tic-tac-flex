@@ -7,7 +7,7 @@ interface CellProps {
 }
 const Cell: React.FC<CellProps> = ({style, onClick, children}) => (
 
-    <td style={style} onClick = {onClick}>
+    <td style={style} onClick = {onClick} role ={"gridcell"}>
         {children}
     </td>
 

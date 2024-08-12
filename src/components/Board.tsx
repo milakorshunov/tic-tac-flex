@@ -41,7 +41,7 @@ const Board: React.FC<BoardProps> = ({ boardSize, data, symbol, handleClick }) =
 
     function renderRow(row: number) {
         return (
-            <tr>
+            <tr key={row}>
                 {Array.from({ length: boardSize }).map((_, col) => renderCell(row, col))}
             </tr>
         )
