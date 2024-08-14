@@ -1,5 +1,6 @@
 import React, { CSSProperties } from "react";
-import Cell from "./Cell";
+import Cell from '../Cell/Cell';
+import './Board.scss';
 
 interface BoardProps {
     boardSize: number,
@@ -9,31 +10,16 @@ interface BoardProps {
 }
 
 const Board: React.FC<BoardProps> = ({ boardSize, data, symbol, handleClick }) => {
-
-    const tdStyle: React.CSSProperties = {
-        width: "100px",
-        height: "100px",
-        border: "1px solid grey",
-        textAlign: "center",
-        fontSize: "24px",
-    };
-   
-    const tableStyle: React.CSSProperties = {
-        margin: "20px auto",
-        borderCollapse: "collapse"
-    }
     
-    function cellStyle(symbol: string): CSSProperties {
-        return {
-            ...tdStyle,
-            color: symbol === 'X' ? 'green' : 'red'
-        };
+    function cellStyle(symbol: string): string {
+        return symbol === 'X' ? 'cell-x' : 'cell-o';
+        
     }
 
     function renderCell(row: number, col: number) {
         const index: number = row * boardSize + col;
         return (
-            <Cell style={cellStyle(data[index])} key={index} onClick={() => handleClick(index)}>{data[index]}</Cell>
+            <Cell className={cellStyle(data[index])} key={index} onClick={() => handleClick(index)}>{data[index]}</Cell>
         );
 
     }
@@ -50,7 +36,7 @@ const Board: React.FC<BoardProps> = ({ boardSize, data, symbol, handleClick }) =
 
     function renderTable() {
         return (
-            <table style={tableStyle}>
+            <table className="board-table">
                 <tbody>
                     {Array.from({ length: boardSize }).map((_, row) => renderRow(row))}
                 </tbody>

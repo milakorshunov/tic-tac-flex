@@ -1,6 +1,5 @@
-import React, { CSSProperties, useRef, useState } from 'react';
-import Board from './components/Board';
-
+import React, { useRef, useState } from 'react';
+import Board from './components/Board/Board';
 
 function App() {
   type GameState = 'Active' | 'Victory' | 'Tie';
@@ -14,34 +13,6 @@ function App() {
   const [symbol, setSimbol] = useState("X");
   const [state, setState] = useState<GameState>("Active");
   
-
-  const styles: { [key: string]: CSSProperties } = {
-    table: {
-      margin: "20px auto",
-      borderCollapse: "collapse"
-    },
-    
-    h1: {
-      textAlign: 'center'
-    },
-    button: {
-      textAlign: "center",
-      marginTop: "20px",
-      padding: "10px 20px",
-      backgroundColor: "#04AA6D",
-      color: "white",
-      borderRadius: "8px",
-      border: "none",
-      fontSize: "16px"
-    },
-    div: {
-      margin: "auto",
-      textAlign: 'center'
-    }
-
-  };
-
-
   function handleClick(i: number) {
 
     if (data[i] === '' && state === 'Active') {
@@ -110,19 +81,26 @@ function App() {
   function resetBoard() {
     const newBoardSize = Math.max(parseInt(boardSizeRef.current?.value || '3'), 1);
     const newVictorySize = Math.max(parseInt(victorySizeRef.current?.value || '3'), 1);
-    setBoardSize(newBoardSize);
-    setVictorySize(newVictorySize);
+  
+    if (newVictorySize > newBoardSize) {
+      
+      if (victorySizeRef.current) {
+        victorySizeRef.current.value = newBoardSize.toString(); // Reset the input value
+      }
+    }
 
+    setVictorySize(newVictorySize);
+    setBoardSize(newBoardSize);
+  
     setData(Array(boardSize * boardSize).fill(''));
     setSimbol("X");
     setState("Active");
   }
 
-
   return (
-    <div style={styles.div}>
+    <div className='container' >
 
-      <h1 style={styles.h1}>{showMessage()}</h1>
+      <h1 >{showMessage()}</h1>
 
      <Board boardSize={boardSize} data={data} symbol={symbol} handleClick={handleClick}/> 
 
@@ -134,7 +112,7 @@ function App() {
         <input type="number" defaultValue={victorySize} ref={victorySizeRef}></input>
       </div>
 
-      <button type="button" style={styles.button} onClick={() => resetBoard()}>Reset the game</button>
+      <button type="button" className="button" onClick={() => resetBoard()}>Reset the game</button>
 
     </div>
   );

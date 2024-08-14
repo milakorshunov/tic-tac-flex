@@ -1,0 +1,31 @@
+@import '/src/variables';
+
+.board-table {
+    margin: 20px auto;
+    border-collapse: collapse;
+  }
+  
+  .cell-x {
+    background-color: $primary-color;
+    color: white;
+  }
+  
+  .cell-o {
+    background-color: $secondary-color;
+    color: white;
+  }
+  .button {
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: $secondary-color;
+    color: white;
+    border-radius: 8px;
+    border: none;
+    font-size: 16px;
+  }
+  .container {
+    margin: auto;
+    text-align: center;
+  }
+ 
