@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import Board from './components/Board/Board';
 
 function App() {
-  type GameState = 'Active' | 'Victory' | 'Tie';
+  type GameState = 'Active' | 'Victory' | 'Draw';
 
   const [boardSize, setBoardSize] = useState<number>(3);
   const [victorySize, setVictorySize] = useState<number>(3);
@@ -24,7 +24,7 @@ function App() {
         setState("Victory");
 
       } else if (newDataArray.every((cell) => cell !== "")) {
-        setState("Tie");
+        setState("Draw");
 
       } else {
         setSimbol(symbol === 'X' ? "O" : "X");
@@ -68,11 +68,11 @@ function App() {
   function showMessage() {
     var message = '';
     if (state === "Victory") {
-      message = ` It is a Victory for ${symbol}`;
-    } else if (state === 'Tie') {
-      message = "It is Tie";
+      message = ` ${symbol}'s Won!\nGame Over`;
+    } else if (state === 'Draw') {
+      message = "Draw!";
     } else {
-      message = `${symbol} is playing`;
+      message = `${symbol} Turn`;
 
     }
     return message;
@@ -100,7 +100,7 @@ function App() {
   return (
     <div className='container' >
 
-      <h1 >{showMessage()}</h1>
+      <h1 style={{ whiteSpace: 'pre-line' }} >{showMessage()}</h1>
 
      <Board boardSize={boardSize} data={data} symbol={symbol} handleClick={handleClick}/> 
 

@@ -1,9 +1,13 @@
 /* Define general cell styles */
 td {
-    width: 60px;
-    height: 60px;
-    border: 1px solid grey;
-    text-align: center;
-    font-size: 24px;
-    cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border: 1px solid grey;
+  text-align: center;
+  cursor: pointer;
+  background-color: white; /* Default background color */
+  width: calc((60vmin / var(--board-size)) - 2px); /* Adjust width */
+  height: calc((60vmin / var(--board-size)) - 2px); /* Adjust height */
+  box-sizing: border-box; /* Ensure borders are included in the size */
+  font-size: calc((50vmin / var(--board-size)) * 0.5); /* Font size slightly smaller than cell size */
   }

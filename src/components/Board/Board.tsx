@@ -1,4 +1,4 @@
-import React, { CSSProperties } from "react";
+import React, { CSSProperties, useEffect } from "react";
 import Cell from '../Cell/Cell';
 import './Board.scss';
 
@@ -10,6 +10,10 @@ interface BoardProps {
 }
 
 const Board: React.FC<BoardProps> = ({ boardSize, data, symbol, handleClick }) => {
+    useEffect(() => {
+        document.documentElement.style.setProperty('--board-size', boardSize.toString());
+        }, [boardSize]);
+    
     
     function cellStyle(symbol: string): string {
         return symbol === 'X' ? 'cell-x' : 'cell-o';
